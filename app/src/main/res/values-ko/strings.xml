@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AcquaAndroid</string>
+    <string name="friend">친구</string>
+    <string name="group">그룹</string>
+    <string name="calendar">캘린더</string>
+    <string name="feed">피드</string>
+    <string name="notice">알림</string>
+</resources>
