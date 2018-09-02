@@ -6,4 +6,5 @@
     <string name="calendar">캘린더</string>
     <string name="feed">피드</string>
     <string name="notice">알림</string>
+    <string name="name">이름</string>
 </resources>

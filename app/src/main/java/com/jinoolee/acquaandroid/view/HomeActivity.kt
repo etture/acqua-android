@@ -12,6 +12,7 @@ import android.util.Log
 import com.jakewharton.rxbinding2.support.design.widget.RxBottomNavigationView
 import com.jinoolee.acquaandroid.R
 import com.jinoolee.acquaandroid.databinding.ActivityHomeBinding
+import com.jinoolee.acquaandroid.view.friendsList.FriendsListFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -31,11 +32,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding
         binding.bottomNavigationView.disableShiftMode()
-
-        friendsListFrag
-
         initFragment()
 
         RxBottomNavigationView.itemSelections(binding.bottomNavigationView)
@@ -54,13 +51,13 @@ class HomeActivity : AppCompatActivity() {
         storeToken()
     }
 
-    fun initFragment() {
+    private fun initFragment() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragment_container, friendsListFrag)
         transaction.addToBackStack(null)
         transaction.commit()
 
-        binding.bottomNavigationView.selectedItemId = R.id.action_calendar
+        binding.bottomNavigationView.selectedItemId = R.id.action_friend
     }
 
     @SuppressLint("RestrictedApi")
@@ -84,7 +81,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    fun storeToken() {
+    private fun storeToken() {
         val pref = getSharedPreferences("authPref", Context.MODE_PRIVATE)
         val editor = pref.edit()
         editor.putString("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwLCJpYXQiOjE1MzUxMDkxNDIwMzN9.n-sil6qbc0RE_rBAxWaQHYfb4vumSTmXFWsW-3hDNf4")

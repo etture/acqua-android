@@ -1,10 +1,9 @@
-package com.jinoolee.acquaandroid.view
+package com.jinoolee.acquaandroid.view.friendsList
 
 import android.content.Context
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.method.ScrollingMovementMethod
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,7 @@ import com.jinoolee.acquaandroid.viewmodel.FriendsListViewModel
 
 class FriendsListFragment : Fragment(), FriendsListViewContract {
 
-    lateinit var binding: FragmentFriendsListBinding
+    private lateinit var binding: FragmentFriendsListBinding
 
     private val viewModel by lazy {
         FriendsListViewModel(activity as Context, this)
@@ -24,7 +23,6 @@ class FriendsListFragment : Fragment(), FriendsListViewContract {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -33,21 +31,19 @@ class FriendsListFragment : Fragment(), FriendsListViewContract {
         binding = FragmentFriendsListBinding.inflate(inflater, container, false)
         binding.friendsListViewModel = viewModel
         val myView = binding.root
-        binding.textView.movementMethod = ScrollingMovementMethod()
+
+        val adapter = FriendsListAdapter()
+        binding.friendsListRecyclerView.layoutManager = LinearLayoutManager(activity)
+        binding.friendsListRecyclerView.adapter = adapter
 
         viewModel.showFriendsList()
 
         return myView
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.clearDisposable()
     }
 
     companion object {

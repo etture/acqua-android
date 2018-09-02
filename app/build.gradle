@@ -54,4 +54,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-design-kotlin:2.1.1'
     implementation 'com.android.support:design:27.1.1'
     //
+    //anko
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    //
 }
