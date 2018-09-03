@@ -7,4 +7,5 @@
     <string name="feed">피드</string>
     <string name="notice">알림</string>
     <string name="name">이름</string>
+    <string name="full_name">%2$s%1$s</string>
 </resources>

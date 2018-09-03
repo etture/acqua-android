@@ -4,16 +4,20 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.jinoolee.acquaandroid.databinding.FriendItemBinding
+import com.jinoolee.acquaandroid.model.ProfileBasic
 import com.jinoolee.acquaandroid.view.BindableAdapter
-import com.jinoolee.acquaandroid.viewmodel.FriendItemViewModel
 
-class FriendsListAdapter : RecyclerView.Adapter<FriendsListAdapter.FriendHolder>(), BindableAdapter<List<FriendItemViewModel>> {
+class FriendsListAdapter : RecyclerView.Adapter<FriendsListAdapter.FriendHolder>(), BindableAdapter<List<ProfileBasic>> {
 
-    private var friendItems = emptyList<FriendItemViewModel>()
+    companion object {
+        private val TAG = FriendsListAdapter::class.simpleName
+    }
+
+    private var friendItems = emptyList<ProfileBasic>()
 
     override fun getItemCount() = friendItems.size
 
-    override fun setData(data: List<FriendItemViewModel>) {
+    override fun setData(data: List<ProfileBasic>) {
         friendItems = data
         notifyDataSetChanged()
     }
@@ -26,12 +30,10 @@ class FriendsListAdapter : RecyclerView.Adapter<FriendsListAdapter.FriendHolder>
 
     override fun onBindViewHolder(holder: FriendHolder, position: Int) {
         holder.bind(friendItems[position])
-//        RxView.clicks(holder.itemView)
-//                .map { _ -> holder.}
     }
 
     inner class FriendHolder(private val binding: FriendItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(friend: FriendItemViewModel) {
+        fun bind(friend: ProfileBasic) {
             binding.friendItemViewModel = friend
             binding.executePendingBindings()
         }

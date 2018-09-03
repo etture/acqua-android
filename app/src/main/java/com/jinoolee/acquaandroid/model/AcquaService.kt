@@ -12,16 +12,4 @@ interface AcquaService {
 
     @GET("friends/get")
     fun getFriendsList(): Flowable<FriendsList>
-
-    data class ProfileBasic (
-            @SerializedName("id") @Expose val id: Int,
-            @SerializedName("last_name") @Expose val lastName: String,
-            @SerializedName("first_name") @Expose val firstName: String,
-            @SerializedName("email") @Expose val email: String,
-            @SerializedName("phone_number") @Expose val phoneNumber: String
-    )
-
-    data class FriendsList (
-            @SerializedName("friends_list") @Expose val list: List<ProfileBasic>
-    )
 }

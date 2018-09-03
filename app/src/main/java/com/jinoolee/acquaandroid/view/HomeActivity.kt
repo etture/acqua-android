@@ -12,7 +12,11 @@ import android.util.Log
 import com.jakewharton.rxbinding2.support.design.widget.RxBottomNavigationView
 import com.jinoolee.acquaandroid.R
 import com.jinoolee.acquaandroid.databinding.ActivityHomeBinding
+import com.jinoolee.acquaandroid.view.calendar.CalendarFragment
+import com.jinoolee.acquaandroid.view.feed.FeedFragment
+import com.jinoolee.acquaandroid.view.friendsGroup.FriendsGroupFragment
 import com.jinoolee.acquaandroid.view.friendsList.FriendsListFragment
+import com.jinoolee.acquaandroid.view.notice.NoticeFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -30,19 +34,37 @@ class HomeActivity : AppCompatActivity() {
         FriendsListFragment.newInstance()
     }
 
+    private val friendsGroupFrag by lazy {
+        FriendsGroupFragment.newInstance()
+    }
+
+    private val calendarFrag by lazy {
+        CalendarFragment.newInstance()
+    }
+
+    private val feedFrag by lazy {
+        FeedFragment.newInstance()
+    }
+
+    private val noticeFrag by lazy {
+        NoticeFragment.newInstance()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.bottomNavigationView.disableShiftMode()
         initFragment()
 
         RxBottomNavigationView.itemSelections(binding.bottomNavigationView)
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {
                             val transaction = supportFragmentManager.beginTransaction()
                             when(it.itemId){
                                 R.id.action_friend -> transaction.replace(R.id.fragment_container, friendsListFrag).commit()
+                                R.id.action_group -> transaction.replace(R.id.fragment_container, friendsGroupFrag).commit()
+                                R.id.action_calendar -> transaction.replace(R.id.fragment_container, calendarFrag).commit()
+                                R.id.action_feed -> transaction.replace(R.id.fragment_container, feedFrag).commit()
+                                R.id.action_notice -> transaction.replace(R.id.fragment_container, noticeFrag).commit()
                             }
                         }
                 )

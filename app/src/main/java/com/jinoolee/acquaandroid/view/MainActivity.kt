@@ -10,6 +10,7 @@ import com.jinoolee.acquaandroid.viewmodel.MainViewModel
 import com.jinoolee.acquaandroid.R
 import com.jinoolee.acquaandroid.databinding.ActivityMainBinding
 import com.jinoolee.acquaandroid.model.AcquaService
+import com.jinoolee.acquaandroid.model.ProfileBasic
 import com.jinoolee.acquaandroid.network.ApiClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {
-                            val profile: AcquaService.ProfileBasic? = it
+                            val profile: ProfileBasic? = it
                             mainModel.result = "ID: ${profile!!.id} \nFirst Name: ${profile.firstName} \nLast Name: ${profile.lastName} \nEmail: ${profile.email} \nPhone Number: ${profile.phoneNumber}"
                             Log.i("result", mainModel.result)
                         },

@@ -5,6 +5,7 @@
     tools:context=".view.friendsList.FriendsListFragment">
 
     <data>
+
         <variable
             name="friendsListViewModel"
             type="com.jinoolee.acquaandroid.viewmodel.FriendsListViewModel" />
@@ -12,21 +13,28 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/friends_list_swipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:refreshing="@{friendsListViewModel.isRefreshing}"
+            >
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/friends_list_recycler_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scrollbars="vertical"
-            app:data="@{friendsListViewModel.friendsList}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/friends_list_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scrollbars="vertical"
+                app:data="@{friendsListViewModel.friendsList}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
     </android.support.constraint.ConstraintLayout>
 
 </layout>

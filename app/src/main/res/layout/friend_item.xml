@@ -7,7 +7,7 @@
     <data>
         <variable
             name="friendItemViewModel"
-            type="com.jinoolee.acquaandroid.viewmodel.FriendItemViewModel"
+            type="com.jinoolee.acquaandroid.model.ProfileBasic"
             />
     </data>
 
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{friendItemViewModel.name}"
+            android:text="@{@string/full_name(friendItemViewModel.firstName, friendItemViewModel.lastName)}"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
