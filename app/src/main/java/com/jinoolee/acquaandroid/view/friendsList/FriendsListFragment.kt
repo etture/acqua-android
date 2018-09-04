@@ -12,11 +12,11 @@ import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 
 import com.jinoolee.acquaandroid.contract.FriendsListViewContract
 import com.jinoolee.acquaandroid.databinding.FragmentFriendsListBinding
-import com.jinoolee.acquaandroid.model.AcquaService
 import com.jinoolee.acquaandroid.model.FriendsList
 import com.jinoolee.acquaandroid.viewmodel.FriendsListViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
+import org.jetbrains.anko.startActivity
 
 class FriendsListFragment : Fragment(), FriendsListViewContract {
 
@@ -63,6 +63,13 @@ class FriendsListFragment : Fragment(), FriendsListViewContract {
                         }
                 ))
 
+        disposables.add(adapter.getFriendItemClickSubject()
+                .subscribeBy(
+                        onNext = {
+                            activity!!.startActivity<FriendProfileActivity>("id" to it)
+                        }
+                ))
+
         return myView
     }
 
@@ -77,12 +84,7 @@ class FriendsListFragment : Fragment(), FriendsListViewContract {
         Log.i(TAG, "onDestroy called")
     }
 
-    // =====FriendsListViewContract Implementation=====
-    // Change the view based on the FriendsList received
-
-    override fun showFriendsList(friendsList: FriendsList) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    //=====FriendsListViewContract Implementation=====
 
     override fun clearDisposables() {
         disposables.clear()

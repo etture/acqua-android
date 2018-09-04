@@ -5,7 +5,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jakewharton.rxbinding2.view.RxView
 import com.jinoolee.acquaandroid.databinding.FragmentNoticeBinding
+import io.reactivex.rxkotlin.subscribeBy
+import org.jetbrains.anko.startActivity
 
 class NoticeFragment : Fragment() {
     companion object {
@@ -28,6 +31,14 @@ class NoticeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentNoticeBinding.inflate(inflater, container, false)
         val myView = binding.root
+
+        RxView.clicks(binding.myProfile)
+                .subscribeBy(
+                        onNext = {
+                            activity!!.startActivity<MyProfileActivity>()
+                        }
+                )
+
         return myView
     }
 }

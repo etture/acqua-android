@@ -3,9 +3,11 @@ package com.jinoolee.acquaandroid.view.friendsList
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.jakewharton.rxbinding2.view.RxView
 import com.jinoolee.acquaandroid.databinding.FriendItemBinding
 import com.jinoolee.acquaandroid.model.ProfileBasic
 import com.jinoolee.acquaandroid.view.BindableAdapter
+import io.reactivex.subjects.PublishSubject
 
 class FriendsListAdapter : RecyclerView.Adapter<FriendsListAdapter.FriendHolder>(), BindableAdapter<List<ProfileBasic>> {
 
@@ -14,6 +16,10 @@ class FriendsListAdapter : RecyclerView.Adapter<FriendsListAdapter.FriendHolder>
     }
 
     private var friendItems = emptyList<ProfileBasic>()
+
+    private val friendItemClickSubject: PublishSubject<Int> = PublishSubject.create()
+
+    fun getFriendItemClickSubject() = friendItemClickSubject
 
     override fun getItemCount() = friendItems.size
 
@@ -30,6 +36,9 @@ class FriendsListAdapter : RecyclerView.Adapter<FriendsListAdapter.FriendHolder>
 
     override fun onBindViewHolder(holder: FriendHolder, position: Int) {
         holder.bind(friendItems[position])
+        RxView.clicks(holder.itemView)
+                .map { _ -> friendItems[position].id }
+                .subscribe(friendItemClickSubject)
     }
 
     inner class FriendHolder(private val binding: FriendItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -37,5 +46,10 @@ class FriendsListAdapter : RecyclerView.Adapter<FriendsListAdapter.FriendHolder>
             binding.friendItemViewModel = friend
             binding.executePendingBindings()
         }
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        friendItemClickSubject.onComplete()
     }
 }

@@ -33,7 +33,6 @@ class FriendsListViewModel(val context: Context, val view: FriendsListViewContra
         disposables.add(acquaService.getFriendsList()
                 .subscribeOn(Schedulers.io())
                 .flatMap{list -> Flowable.fromIterable(list.list)}
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {
                             friendsList.add(it)

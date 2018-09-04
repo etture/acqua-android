@@ -106,7 +106,9 @@ class HomeActivity : AppCompatActivity() {
     private fun storeToken() {
         val pref = getSharedPreferences("authPref", Context.MODE_PRIVATE)
         val editor = pref.edit()
-        editor.putString("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwLCJpYXQiOjE1MzUxMDkxNDIwMzN9.n-sil6qbc0RE_rBAxWaQHYfb4vumSTmXFWsW-3hDNf4")
+        val koreanTestToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMzLCJpYXQiOjE1MzYwMDUzNTg2OTV9.HRvEoOP8Msb0LlBK7NnCNXGx1CZeaCFNBLeXTTVzFtM"
+        val myToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwLCJpYXQiOjE1MzUxMDkxNDIwMzN9.n-sil6qbc0RE_rBAxWaQHYfb4vumSTmXFWsW-3hDNf4"
+        editor.putString("token", koreanTestToken)
         editor.apply()
     }
 }

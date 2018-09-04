@@ -8,8 +8,14 @@ import retrofit2.http.Path
 
 interface AcquaService {
     @GET("profiles/basic/{user_id}")
-    fun getBasicProfile(@Path("user_id") user_id: String): Flowable<ProfileBasic>
+    fun getBasicProfile(@Path("user_id") userId: String): Flowable<ProfileBasic>
 
     @GET("friends/get")
     fun getFriendsList(): Flowable<FriendsList>
+
+    @GET("profiles/{user_id}")
+    fun getCompleteProfile(@Path("user_id") userId: String): Flowable<ProfileComplete>
+
+    @GET("profiles/self")
+    fun getMyCompleteProfile(): Flowable<ProfileComplete>
 }
