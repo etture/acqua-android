@@ -8,7 +8,7 @@
     <data>
         <variable
             name="friend"
-            type="com.jinoolee.acquaandroid.viewmodel.FriendProfileViewModel"/>
+            type="com.jinoolee.acquaandroid.viewmodel.ProfileViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

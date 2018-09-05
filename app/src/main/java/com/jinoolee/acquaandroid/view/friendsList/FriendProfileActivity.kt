@@ -1,6 +1,5 @@
 package com.jinoolee.acquaandroid.view.friendsList
 
-import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,8 +7,7 @@ import android.util.Log
 import com.jinoolee.acquaandroid.R
 import com.jinoolee.acquaandroid.contract.FriendProfileViewContract
 import com.jinoolee.acquaandroid.databinding.ActivityFriendProfileBinding
-import com.jinoolee.acquaandroid.databinding.ActivityHomeBinding
-import com.jinoolee.acquaandroid.viewmodel.FriendProfileViewModel
+import com.jinoolee.acquaandroid.viewmodel.ProfileViewModel
 
 class FriendProfileActivity: AppCompatActivity(), FriendProfileViewContract {
     companion object {
@@ -21,7 +19,7 @@ class FriendProfileActivity: AppCompatActivity(), FriendProfileViewContract {
     }
 
     private val viewModel by lazy {
-        FriendProfileViewModel(this)
+        ProfileViewModel(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

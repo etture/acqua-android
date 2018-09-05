@@ -7,7 +7,7 @@ import android.util.Log
 import com.jinoolee.acquaandroid.R
 import com.jinoolee.acquaandroid.contract.FriendProfileViewContract
 import com.jinoolee.acquaandroid.databinding.ActivityMyProfileBinding
-import com.jinoolee.acquaandroid.viewmodel.FriendProfileViewModel
+import com.jinoolee.acquaandroid.viewmodel.ProfileViewModel
 
 class MyProfileActivity : AppCompatActivity(), FriendProfileViewContract {
 
@@ -20,7 +20,7 @@ class MyProfileActivity : AppCompatActivity(), FriendProfileViewContract {
     }
 
     private val viewModel by lazy {
-        FriendProfileViewModel(this)
+        ProfileViewModel(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

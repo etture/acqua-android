@@ -1,5 +1,6 @@
 package com.jinoolee.acquaandroid.view.friendsList
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -34,7 +35,8 @@ class FriendsListFragment : Fragment(), FriendsListViewContract {
     private lateinit var binding: FragmentFriendsListBinding
 
     private val viewModel by lazy {
-        FriendsListViewModel(activity as Context, this)
+        ViewModelProviders.of(this).get(FriendsListViewModel::class.java)
+//        FriendsListViewModel(activity!!.application, this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +50,7 @@ class FriendsListFragment : Fragment(), FriendsListViewContract {
         // Inflate the layout for this fragment
         binding = FragmentFriendsListBinding.inflate(inflater, container, false)
         binding.friendsListViewModel = viewModel
+        binding.setLifecycleOwner(this)
         val myView = binding.root
 
         val adapter = FriendsListAdapter()

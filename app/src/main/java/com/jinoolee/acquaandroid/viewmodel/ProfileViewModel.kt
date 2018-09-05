@@ -12,9 +12,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-class FriendProfileViewModel(val context: Context): BaseObservable() {
+class ProfileViewModel(val context: Context): BaseObservable() {
     companion object {
-        private val TAG = FriendProfileViewModel::class.simpleName
+        private val TAG = ProfileViewModel::class.simpleName
     }
 
     @get:Bindable
@@ -24,6 +24,7 @@ class FriendProfileViewModel(val context: Context): BaseObservable() {
 
     private val acquaService = ApiClient(context).create()
 
+    //Call to AcquaService.getCompleteProfile(userId: Int)
     private fun getFriendProfile() {
         val userId = (context as AppCompatActivity).intent.getIntExtra("id", 1)
         disposables.add(acquaService.getCompleteProfile(userId.toString())
@@ -42,6 +43,7 @@ class FriendProfileViewModel(val context: Context): BaseObservable() {
         )
     }
 
+    //Call to AcquaService.getMyCompleteProfile()
     private fun getMyProfile() {
         disposables.add(acquaService.getMyCompleteProfile()
                 .subscribeOn(Schedulers.io())
@@ -61,11 +63,13 @@ class FriendProfileViewModel(val context: Context): BaseObservable() {
 
     //====Functions accessible by view====
 
+    //Called by FriendProfileActivity
     fun showFriendProfile() {
         getFriendProfile()
         Log.i(TAG, "showFriendProfile called")
     }
 
+    //Called by MyProfileActivity
     fun showMyProfile() {
         getMyProfile()
         Log.i(TAG, "showMyProfile called")
