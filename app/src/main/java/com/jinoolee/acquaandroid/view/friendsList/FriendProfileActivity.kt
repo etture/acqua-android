@@ -1,41 +1,33 @@
 package com.jinoolee.acquaandroid.view.friendsList
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.jinoolee.acquaandroid.R
-import com.jinoolee.acquaandroid.contract.FriendProfileViewContract
 import com.jinoolee.acquaandroid.databinding.ActivityFriendProfileBinding
-import com.jinoolee.acquaandroid.viewmodel.ProfileViewModel
+import com.jinoolee.acquaandroid.util.vmb
+import com.jinoolee.acquaandroid.view.friendsList.viewModel.ProfileViewModel
 
-class FriendProfileActivity: AppCompatActivity(), FriendProfileViewContract {
+class FriendProfileActivity: AppCompatActivity() {
     companion object {
         private val TAG = FriendProfileActivity::class.simpleName
     }
 
-    private val binding by lazy {
-        DataBindingUtil.setContentView<ActivityFriendProfileBinding>(this@FriendProfileActivity, R.layout.activity_friend_profile)
-    }
-
-    private val viewModel by lazy {
-        ProfileViewModel(this)
-    }
+    private val vmb by vmb<ProfileViewModel, ActivityFriendProfileBinding>(R.layout.activity_friend_profile)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.friend = viewModel
-        viewModel.showFriendProfile()
-    }
+        vmb.binding.setLifecycleOwner(this@FriendProfileActivity)
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.clearDisposables()
-    }
-
-    //====FriendProfileViewContract Implementation
-
-    override fun clearDisposables() {
-        Log.i(TAG, "clearDisposables called")
+        val userId = intent.getIntExtra("id", 1)
+        vmb.viewModel.showFriendProfile(userId)
     }
 }
+
+//    private val binding by lazy {
+//        DataBindingUtil.setContentView<ActivityFriendProfileBinding>(this@FriendProfileActivity, R.layout.activity_friend_profile)
+//    }
+
+//    private val viewModel by lazy {
+////        ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+//        ProfileViewModel(this)
+//    }

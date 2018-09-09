@@ -46,8 +46,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation 'com.google.code.gson:gson:2.8.5'
-    //
+    //Android Architecture Components
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    kapt "android.arch.lifecycle:compiler:$lifecycle_version"
     //rxjava / rxkotlin / rxandroid
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'

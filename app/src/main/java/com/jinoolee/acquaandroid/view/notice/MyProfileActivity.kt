@@ -1,42 +1,23 @@
 package com.jinoolee.acquaandroid.view.notice
 
-import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.jinoolee.acquaandroid.R
-import com.jinoolee.acquaandroid.contract.FriendProfileViewContract
 import com.jinoolee.acquaandroid.databinding.ActivityMyProfileBinding
-import com.jinoolee.acquaandroid.viewmodel.ProfileViewModel
+import com.jinoolee.acquaandroid.util.vmb
+import com.jinoolee.acquaandroid.view.friendsList.viewModel.ProfileViewModel
 
-class MyProfileActivity : AppCompatActivity(), FriendProfileViewContract {
+class MyProfileActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = MyProfileActivity::class.simpleName
     }
 
-    private val binding by lazy {
-        DataBindingUtil.setContentView<ActivityMyProfileBinding>(this@MyProfileActivity, R.layout.activity_my_profile)
-    }
-
-    private val viewModel by lazy {
-        ProfileViewModel(this)
-    }
+    private val vmb by vmb<ProfileViewModel, ActivityMyProfileBinding>(R.layout.activity_my_profile)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.friend = viewModel
-        viewModel.showMyProfile()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.clearDisposables()
-    }
-
-    //====FriendProfileViewContract Implementation
-
-    override fun clearDisposables() {
-        Log.i(TAG, "clearDisposables called")
+        vmb.binding.setLifecycleOwner(this@MyProfileActivity)
+        vmb.viewModel.showMyProfile()
     }
 }

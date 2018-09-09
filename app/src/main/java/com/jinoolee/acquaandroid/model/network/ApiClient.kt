@@ -1,4 +1,4 @@
-package com.jinoolee.acquaandroid.network
+package com.jinoolee.acquaandroid.model.network
 
 import android.content.Context
 import android.text.TextUtils

@@ -1,7 +1,8 @@
 package com.jinoolee.acquaandroid.model
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+import com.jinoolee.acquaandroid.model.dataModel.FriendsList
+import com.jinoolee.acquaandroid.model.dataModel.ProfileBasic
+import com.jinoolee.acquaandroid.model.dataModel.ProfileComplete
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Path

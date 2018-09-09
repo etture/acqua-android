@@ -1,4 +1,4 @@
-package com.jinoolee.acquaandroid.model
+package com.jinoolee.acquaandroid.model.dataModel
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

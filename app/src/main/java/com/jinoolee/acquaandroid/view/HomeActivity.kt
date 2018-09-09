@@ -12,6 +12,7 @@ import android.util.Log
 import com.jakewharton.rxbinding2.support.design.widget.RxBottomNavigationView
 import com.jinoolee.acquaandroid.R
 import com.jinoolee.acquaandroid.databinding.ActivityHomeBinding
+import com.jinoolee.acquaandroid.util.vmb
 import com.jinoolee.acquaandroid.view.calendar.CalendarFragment
 import com.jinoolee.acquaandroid.view.feed.FeedFragment
 import com.jinoolee.acquaandroid.view.friendsGroup.FriendsGroupFragment
@@ -107,7 +108,7 @@ class HomeActivity : AppCompatActivity() {
         val pref = getSharedPreferences("authPref", Context.MODE_PRIVATE)
         val editor = pref.edit()
         val koreanTestToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMzLCJpYXQiOjE1MzYwMDUzNTg2OTV9.HRvEoOP8Msb0LlBK7NnCNXGx1CZeaCFNBLeXTTVzFtM"
-        val myToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwLCJpYXQiOjE1MzUxMDkxNDIwMzN9.n-sil6qbc0RE_rBAxWaQHYfb4vumSTmXFWsW-3hDNf4"
+//        val myToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwLCJpYXQiOjE1MzUxMDkxNDIwMzN9.n-sil6qbc0RE_rBAxWaQHYfb4vumSTmXFWsW-3hDNf4"
         editor.putString("token", koreanTestToken)
         editor.apply()
     }

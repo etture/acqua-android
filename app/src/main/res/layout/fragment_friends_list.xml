@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="friendsListViewModel"
-            type="com.jinoolee.acquaandroid.viewmodel.FriendsListViewModel" />
+            name="viewModel"
+            type="com.jinoolee.acquaandroid.view.friendsList.viewModel.FriendsListViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -19,7 +19,7 @@
             android:id="@+id/friends_list_swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:refreshing="@{friendsListViewModel.isRefreshing}"
+            app:refreshing="@{viewModel.isRefreshing}"
             >
 
             <android.support.v7.widget.RecyclerView
@@ -27,7 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scrollbars="vertical"
-                app:data="@{friendsListViewModel.friendsList}"
+                app:data="@{viewModel.friendsList.list}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

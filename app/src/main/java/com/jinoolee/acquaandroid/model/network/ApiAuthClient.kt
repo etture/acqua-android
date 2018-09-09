@@ -1,4 +1,4 @@
-package com.jinoolee.acquaandroid.network
+package com.jinoolee.acquaandroid.model.network
 
 import com.jinoolee.acquaandroid.model.AcquaService
 import retrofit2.Retrofit

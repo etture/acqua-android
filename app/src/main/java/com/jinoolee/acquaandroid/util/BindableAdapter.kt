@@ -1,4 +1,4 @@
-package com.jinoolee.acquaandroid.view
+package com.jinoolee.acquaandroid.util
 
 interface BindableAdapter<T> {
     fun setData(data: T)

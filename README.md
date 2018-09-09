@@ -12,7 +12,7 @@ Developed entirely in Kotlin
 
 Libraries used:
 - ReactiveX: RxKotlin, RxAndroid, RxBinding
-- Android Architecture Components: ViewModel, LiveData
+- Android Architecture Components: ViewModel, LiveData, Room
 - HTTP Client: Retrofit2
 - Databinding
 - Anko

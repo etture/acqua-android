@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="friendItemViewModel"
-            type="com.jinoolee.acquaandroid.model.ProfileBasic"
+            name="viewModel"
+            type="com.jinoolee.acquaandroid.model.dataModel.ProfileBasic"
             />
     </data>
 
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{@string/full_name(friendItemViewModel.firstName, friendItemViewModel.lastName)}"
+            android:text="@{@string/full_name(viewModel.firstName, viewModel.lastName)}"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +37,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{friendItemViewModel.phoneNumber}"
+            android:text="@{viewModel.phoneNumber}"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

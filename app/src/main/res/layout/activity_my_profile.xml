@@ -7,8 +7,8 @@
 
     <data>
         <variable
-            name="friend"
-            type="com.jinoolee.acquaandroid.viewmodel.ProfileViewModel"/>
+            name="viewModel"
+            type="com.jinoolee.acquaandroid.view.friendsList.viewModel.ProfileViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -34,7 +34,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="@{@string/full_name(friend.profile.completeProfile.firstName, friend.profile.completeProfile.lastName)}"
+                    android:text="@{@string/full_name(viewModel.profile.completeProfile.firstName, viewModel.profile.completeProfile.lastName)}"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/label_h1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="@{friend.profile.completeProfile.email}"
+                    android:text="@{viewModel.profile.completeProfile.email}"
                     android:textColor="@color/colorMainGray"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/friend_profile_email_label" />
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="@{friend.profile.completeProfile.phoneNumber}"
+                    android:text="@{viewModel.profile.completeProfile.phoneNumber}"
                     android:textColor="@color/colorMainGray"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/friend_profile_phone_number_label" />

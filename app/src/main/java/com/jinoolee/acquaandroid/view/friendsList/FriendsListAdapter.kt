@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.jakewharton.rxbinding2.view.RxView
 import com.jinoolee.acquaandroid.databinding.FriendItemBinding
-import com.jinoolee.acquaandroid.model.ProfileBasic
-import com.jinoolee.acquaandroid.view.BindableAdapter
+import com.jinoolee.acquaandroid.model.dataModel.ProfileBasic
+import com.jinoolee.acquaandroid.util.BindableAdapter
 import io.reactivex.subjects.PublishSubject
 
 class FriendsListAdapter : RecyclerView.Adapter<FriendsListAdapter.FriendHolder>(), BindableAdapter<List<ProfileBasic>> {
@@ -43,7 +43,7 @@ class FriendsListAdapter : RecyclerView.Adapter<FriendsListAdapter.FriendHolder>
 
     inner class FriendHolder(private val binding: FriendItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(friend: ProfileBasic) {
-            binding.friendItemViewModel = friend
+            binding.viewModel = friend
             binding.executePendingBindings()
         }
     }
