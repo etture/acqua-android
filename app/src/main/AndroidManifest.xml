@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.friendsList.FriendProfileActivity" />
-        <activity android:name=".view.notice.MyProfileActivity"/>
+        <activity android:name=".view.notice.MyProfileActivity" />
+        <activity android:name=".view.signin.SignInActivity"></activity>
     </application>
 
 </manifest>

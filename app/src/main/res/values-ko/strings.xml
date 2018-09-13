@@ -11,4 +11,8 @@
     <string name="email">이메일</string>
     <string name="phone_number">전화번호</string>
     <string name="contact">연락처</string>
+    <string name="sign_in">로그인</string>
+    <string name="sign_up">회원가입</string>
+    <string name="enter_email">이메일을 입력해주세요</string>
+    <string name="enter_password">비밀번호를 입력해주세요</string>
 </resources>
