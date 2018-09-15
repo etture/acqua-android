@@ -7,14 +7,23 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiAuthClient{
     companion object {
-        fun create() : AcquaService {
-            val retrofit = Retrofit.Builder()
-                    .baseUrl("https://acqua-api.herokuapp.com/api/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build()
+        private var INSTANCE: AcquaService? = null
 
-            return retrofit.create(AcquaService::class.java)
+        fun getInstance() : AcquaService? {
+            if(INSTANCE == null){
+                val retrofit = Retrofit.Builder()
+                        .baseUrl("https://acqua-api.herokuapp.com/api/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        .build()
+
+                INSTANCE = retrofit.create(AcquaService::class.java)
+            }
+            return INSTANCE
+        }
+
+        fun destroyInstance() {
+            INSTANCE = null
         }
     }
 }

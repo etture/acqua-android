@@ -6,6 +6,5 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "tokenData")
 data class TokenData (
-    @PrimaryKey var id: Int,
-    @ColumnInfo(name = "token") var token: String
+    @PrimaryKey @ColumnInfo(name = "token") var token: String
 )

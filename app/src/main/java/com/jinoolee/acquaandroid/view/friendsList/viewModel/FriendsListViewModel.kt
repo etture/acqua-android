@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.util.Log
 import com.jinoolee.acquaandroid.model.dataModel.FriendsList
 import com.jinoolee.acquaandroid.model.repo.FriendsListRepo
+import com.jinoolee.acquaandroid.model.repo.TokenDataRepo
 import com.jinoolee.acquaandroid.util.plusAssign
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -23,11 +24,11 @@ class FriendsListViewModel(val app: Application) : AndroidViewModel(app) {
 
     //Utils needed in this ViewModel
     private val compositeDisposable = CompositeDisposable()
-    private val repo = FriendsListRepo(getApplication())
+    private val friendsListRepo = FriendsListRepo(getApplication())
 
     //Return list of friends of this user from Repository
     private fun getFriendsList() {
-        compositeDisposable += repo.getFriendsList()
+        compositeDisposable += friendsListRepo.getFriendsList()
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                         onNext = {

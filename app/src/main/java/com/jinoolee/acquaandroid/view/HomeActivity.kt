@@ -69,9 +69,10 @@ class HomeActivity : AppCompatActivity() {
                             }
                         }
                 )
+    }
 
-        //temporary store of token in SharedPreferences
-        storeToken()
+    override fun onBackPressed() {
+        //Nothing happens when back pressed
     }
 
     private fun initFragment() {
@@ -102,14 +103,5 @@ class HomeActivity : AppCompatActivity() {
         } catch (e: IllegalStateException) {
             Log.e(TAG, "Unable to change value of shift mode", e)
         }
-    }
-
-    private fun storeToken() {
-        val pref = getSharedPreferences("authPref", Context.MODE_PRIVATE)
-        val editor = pref.edit()
-        val koreanTestToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMzLCJpYXQiOjE1MzYwMDUzNTg2OTV9.HRvEoOP8Msb0LlBK7NnCNXGx1CZeaCFNBLeXTTVzFtM"
-//        val myToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwLCJpYXQiOjE1MzUxMDkxNDIwMzN9.n-sil6qbc0RE_rBAxWaQHYfb4vumSTmXFWsW-3hDNf4"
-        editor.putString("token", koreanTestToken)
-        editor.apply()
     }
 }

@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.util.Log
 import com.jinoolee.acquaandroid.model.dataModel.ProfileComplete
 import com.jinoolee.acquaandroid.model.repo.ProfileCompleteRepo
+import com.jinoolee.acquaandroid.model.repo.TokenDataRepo
 import com.jinoolee.acquaandroid.util.plusAssign
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -21,11 +22,11 @@ class ProfileViewModel(val app: Application) : AndroidViewModel(app) {
 
     //Utils needed in this ViewModel
     private val compositeDisposable = CompositeDisposable()
-    private val repo = ProfileCompleteRepo(getApplication())
+    private val profileCompleteRepo = ProfileCompleteRepo(getApplication())
 
     //Call to ProfileCompleteRepo.getCompleteProfile(userId: Int)
     private fun getFriendProfile(userId: Int) {
-        compositeDisposable += repo.getCompleteProfile(userId.toString())
+        compositeDisposable += profileCompleteRepo.getCompleteProfile(userId.toString())
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                         onNext = {
@@ -41,7 +42,7 @@ class ProfileViewModel(val app: Application) : AndroidViewModel(app) {
 
     //Call to ProfileCompleteRepo.getMyCompleteProfile()
     private fun getMyProfile() {
-        compositeDisposable += repo.getMyCompleteProfile()
+        compositeDisposable += profileCompleteRepo.getMyCompleteProfile()
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                         onNext = {

@@ -7,7 +7,7 @@ import android.content.Context
 import com.jinoolee.acquaandroid.model.room.dao.TokenDataDao
 import com.jinoolee.acquaandroid.model.room.entity.TokenData
 
-@Database(entities = arrayOf(TokenData::class), version = 1)
+@Database(entities = arrayOf(TokenData::class), version = 1, exportSchema = false)
 abstract class TokenDatabase: RoomDatabase() {
     abstract fun tokenDataDao(): TokenDataDao
 
