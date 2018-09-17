@@ -29,12 +29,6 @@ class SignInActivity : AppCompatActivity() {
         supportActionBar?.hide()
         vmb.binding.setLifecycleOwner(this@SignInActivity)
 
-        if(vmb.viewModel.isSignedIn().value!!){
-            Log.i(TAG, "initial isSignedIn: true")
-        }else{
-            Log.i(TAG, "initial isSignedIn: false")
-        }
-
         compositeDisposable += RxView.clicks(vmb.binding.btnSignIn)
                 .subscribeBy(
                         onNext = {
@@ -55,8 +49,22 @@ class SignInActivity : AppCompatActivity() {
                 })
     }
 
+    override fun onStart() {
+        super.onStart()
+        initialUpdateUI()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
+    }
+
+    private fun initialUpdateUI() {
+        if(vmb.viewModel.isSignedIn().value!!){
+            Log.i(TAG, "initial isSignedIn: true")
+            startActivity(intentFor<HomeActivity>().singleTop())
+        }else{
+            Log.i(TAG, "initial isSignedIn: false")
+        }
     }
 }

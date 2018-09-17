@@ -17,12 +17,13 @@ class ProfileViewModel(val app: Application) : AndroidViewModel(app) {
         private val TAG = ProfileViewModel::class.simpleName
     }
 
-    //Data for view
-    val profile = MutableLiveData<ProfileComplete>().apply{this.value = null}
-
     //Utils needed in this ViewModel
     private val compositeDisposable = CompositeDisposable()
     private val profileCompleteRepo = ProfileCompleteRepo(getApplication())
+
+    //Data for view
+    val profile = MutableLiveData<ProfileComplete>().apply{this.value = null}
+
 
     //Call to ProfileCompleteRepo.getCompleteProfile(userId: Int)
     private fun getFriendProfile(userId: Int) {
@@ -32,6 +33,7 @@ class ProfileViewModel(val app: Application) : AndroidViewModel(app) {
                         onNext = {
                             profile.postValue(it)
                             Log.i(TAG, "onNext received - $profile")
+                            Log.i(TAG, "name: ${profile.value?.completeProfile?.firstName}, gender: ${profile.value?.completeProfile?.gender}, birthday: ${profile.value?.completeProfile?.birthday}")
                         },
                         onError = {
                             val nul = null

@@ -3,7 +3,7 @@ package com.jinoolee.acquaandroid.model.network
 import android.content.Context
 import android.text.TextUtils
 import com.jinoolee.acquaandroid.model.AcquaService
-import com.jinoolee.acquaandroid.util.TokenManager
+import com.jinoolee.acquaandroid.util.SignInManager
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -48,7 +48,7 @@ class ApiClient {
         }
 
         private fun getToken(context: Context): String? {
-            val tokenManager = TokenManager.getInstance(context)
+            val tokenManager = SignInManager.getInstance(context)
             return tokenManager?.getToken()
         }
     }

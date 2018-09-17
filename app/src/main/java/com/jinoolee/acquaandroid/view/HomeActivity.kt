@@ -34,19 +34,15 @@ class HomeActivity : AppCompatActivity() {
     private val friendsListFrag by lazy {
         FriendsListFragment.newInstance()
     }
-
     private val friendsGroupFrag by lazy {
         FriendsGroupFragment.newInstance()
     }
-
     private val calendarFrag by lazy {
         CalendarFragment.newInstance()
     }
-
     private val feedFrag by lazy {
         FeedFragment.newInstance()
     }
-
     private val noticeFrag by lazy {
         NoticeFragment.newInstance()
     }

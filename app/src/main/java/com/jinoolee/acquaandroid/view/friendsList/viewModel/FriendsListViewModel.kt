@@ -18,13 +18,13 @@ class FriendsListViewModel(val app: Application) : AndroidViewModel(app) {
         private val TAG = FriendsListViewModel::class.simpleName
     }
 
-    //Data for view
-    val friendsList = MutableLiveData<FriendsList>().apply { this.value = FriendsList(emptyList()) }
-    val isRefreshing = MutableLiveData<Boolean>().apply { this.value = false }
-
     //Utils needed in this ViewModel
     private val compositeDisposable = CompositeDisposable()
     private val friendsListRepo = FriendsListRepo(getApplication())
+
+    //Data for view
+    val friendsList = MutableLiveData<FriendsList>().apply { this.value = FriendsList(emptyList()) }
+    val isRefreshing = MutableLiveData<Boolean>().apply { this.value = false }
 
     //Return list of friends of this user from Repository
     private fun getFriendsList() {

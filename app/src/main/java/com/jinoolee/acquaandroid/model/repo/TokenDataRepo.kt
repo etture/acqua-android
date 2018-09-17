@@ -18,12 +18,12 @@ class TokenDataRepo(context: Context) {
 
     fun saveToken(token: TokenData) {
         tokenDatabase!!.tokenDataDao().insertToken(token)
-        Log.i("TokenDataRepo", "saveToken called")
+        Log.i("TokenDataRepo", "signIn called")
     }
 
     fun deleteToken() {
         tokenDatabase!!.tokenDataDao().deleteToken()
-        Log.i("TokenDataRepo", "deleteToken called")
+        Log.i("TokenDataRepo", "signOut called")
     }
 
     fun getToken(): Flowable<String> = tokenDatabase!!.tokenDataDao().getToken()
