@@ -7,8 +7,13 @@ import android.os.Bundle
 import android.support.design.internal.BottomNavigationItemView
 import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import com.jakewharton.rxbinding2.support.design.widget.RxBottomNavigationView
 import com.jinoolee.acquaandroid.R
 import com.jinoolee.acquaandroid.databinding.ActivityHomeBinding
@@ -22,7 +27,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     companion object {
         private val TAG = HomeActivity::class.simpleName
     }
@@ -47,12 +52,27 @@ class HomeActivity : AppCompatActivity() {
         NoticeFragment.newInstance()
     }
 
+    private val bottomNavigationView by lazy {
+        binding.appBarHome?.contentHome?.bottomNavigationView
+    }
+    private val drawerLayout by lazy {
+        binding.drawerLayoutHome
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.bottomNavigationView.disableShiftMode()
+        bottomNavigationView?.disableShiftMode()
         initFragment()
 
-        RxBottomNavigationView.itemSelections(binding.bottomNavigationView)
+        //Navigation View settings
+        setSupportActionBar(binding.appBarHome?.homeToolbar)
+        val toggle = ActionBarDrawerToggle(
+                this, drawerLayout, binding.appBarHome?.homeToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        //End Navigation View settings
+
+        RxBottomNavigationView.itemSelections(bottomNavigationView!!)
                 .subscribeBy(
                         onNext = {
                             val transaction = supportFragmentManager.beginTransaction()
@@ -68,8 +88,33 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        //Nothing happens when back pressed
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            //Nothing happens when back pressed at home screen
+        }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.nav, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        when (item?.itemId) {
+            R.id.action_settings -> return true
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 
     private fun initFragment() {
         val transaction = supportFragmentManager.beginTransaction()
@@ -77,7 +122,7 @@ class HomeActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
 
-        binding.bottomNavigationView.selectedItemId = R.id.action_friend
+        bottomNavigationView?.selectedItemId = R.id.action_friend
     }
 
     @SuppressLint("RestrictedApi")

@@ -8,17 +8,17 @@ import com.jinoolee.acquaandroid.model.room.dao.TokenDataDao
 import com.jinoolee.acquaandroid.model.room.entity.TokenData
 
 @Database(entities = arrayOf(TokenData::class), version = 1, exportSchema = false)
-abstract class TokenDatabase: RoomDatabase() {
+abstract class AcquaDatabase: RoomDatabase() {
     abstract fun tokenDataDao(): TokenDataDao
 
     companion object {
-        private var INSTANCE: TokenDatabase? = null
+        private var INSTANCE: AcquaDatabase? = null
 
-        fun getInstance(context: Context): TokenDatabase? {
+        fun getInstance(context: Context): AcquaDatabase? {
             if(INSTANCE == null) {
-                synchronized(TokenDatabase::class) {
+                synchronized(AcquaDatabase::class) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            TokenDatabase::class.java, "token.db")
+                            AcquaDatabase::class.java, "acqua.db")
                             .build()
                 }
             }

@@ -6,7 +6,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.util.Log
 import com.jinoolee.acquaandroid.model.dataModel.FriendsList
 import com.jinoolee.acquaandroid.model.repo.FriendsListRepo
-import com.jinoolee.acquaandroid.model.repo.TokenDataRepo
 import com.jinoolee.acquaandroid.util.plusAssign
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -27,8 +26,18 @@ class FriendsListViewModel(val app: Application) : AndroidViewModel(app) {
     val isRefreshing = MutableLiveData<Boolean>().apply { this.value = false }
 
     //Return list of friends of this user from Repository
-    private fun getFriendsList() {
+    private fun getList() {
         compositeDisposable += friendsListRepo.getFriendsList()
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(
+                        onNext = {
+                            friendsList.postValue(it)
+                        }
+                )
+    }
+
+    private fun refreshList() {
+        compositeDisposable += friendsListRepo.refreshFriendsList()
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                         onNext = {
@@ -51,7 +60,7 @@ class FriendsListViewModel(val app: Application) : AndroidViewModel(app) {
 
     fun showFriendsList() {
         if (friendsList.value!!.list.isEmpty()) {
-            getFriendsList()
+            getList()
             Log.i(TAG, "showFriendsList called")
         }
 
@@ -60,7 +69,7 @@ class FriendsListViewModel(val app: Application) : AndroidViewModel(app) {
     }
 
     fun refreshFriendsList() {
-        getFriendsList()
+        refreshList()
         Log.i(TAG, "refreshFriendsList called")
     }
 }

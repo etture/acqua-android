@@ -24,7 +24,6 @@ class ProfileViewModel(val app: Application) : AndroidViewModel(app) {
     //Data for view
     val profile = MutableLiveData<ProfileComplete>().apply{this.value = null}
 
-
     //Call to ProfileCompleteRepo.getCompleteProfile(userId: Int)
     private fun getFriendProfile(userId: Int) {
         compositeDisposable += profileCompleteRepo.getCompleteProfile(userId.toString())
@@ -33,7 +32,18 @@ class ProfileViewModel(val app: Application) : AndroidViewModel(app) {
                         onNext = {
                             profile.postValue(it)
                             Log.i(TAG, "onNext received - $profile")
-                            Log.i(TAG, "name: ${profile.value?.completeProfile?.firstName}, gender: ${profile.value?.completeProfile?.gender}, birthday: ${profile.value?.completeProfile?.birthday}")
+
+                            //birthday matching
+                            val bdayRegex = """\d{4}-\d{2}-\d{2}""".toRegex()
+                            val bday = bdayRegex.find(it.completeProfile.birthday)
+                            Log.i(TAG, "name: ${profile.value?.completeProfile?.firstName}, gender: ${profile.value?.completeProfile?.gender}, birthday: ${bday?.value}")
+                            val yearRegex = """(\d{4})\.*""".toRegex()
+                            val monthRegex = """(?<=-)(\d{2})(?=-)""".toRegex()
+                            val dayRegex = """(?<=-)(\d{2})(?=T.*)""".toRegex()
+                            val year = yearRegex.find(it.completeProfile.birthday)
+                            val month = monthRegex.find(it.completeProfile.birthday)
+                            val day = dayRegex.find(it.completeProfile.birthday)
+                            Log.i(TAG, "Year: ${year?.value}, Month: ${month?.value}, Day: ${day?.value}")
                         },
                         onError = {
                             val nul = null
